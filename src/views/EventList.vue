@@ -51,7 +51,7 @@ export default {
     return {
       events: null,
       totalEvents: 0,
-      addPage: 5
+      addPage: 2
     }
   },
   created() {
@@ -68,7 +68,7 @@ export default {
   },
   computed: {
     hasNextPage() {
-      let totalPages = Math.ceil(this.totalEvents / 2)
+      let totalPages = Math.ceil(this.totalEvents / this.addPage)
       return this.page < totalPages
     }
   }
