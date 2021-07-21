@@ -20,6 +20,13 @@
         Next Page
       </router-link>
     </div>
+    <select id="addPage" v-model.number="addPage">
+            <option>5</option>
+            <option>4</option>
+            <option>3</option>
+            <option>2</option>
+            <option>1</option>
+    </select>
   </div>
 </template>
 
@@ -43,12 +50,13 @@ export default {
   data() {
     return {
       events: null,
-      totalEvents: 0
+      totalEvents: 0,
+      addPage: 5
     }
   },
   created() {
     watchEffect(() => {
-      EventService.getEvents(2, this.page)
+      EventService.getEvents(this.addPage, this.page)
       .then((response) => {
         this.events = response.data
         this.totalEvents = response.headers['x-total-count']
