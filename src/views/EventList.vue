@@ -12,6 +12,7 @@
     <router-link
       :to="{ name: 'EventList', query: { page: page + 1} }"
       rel="next"
+      v-if="hasNextPage"
     >
       Next Page
     </router-link>
@@ -37,7 +38,8 @@ export default {
   },
   data() {
     return {
-      events: null
+      events: null,
+      totalEvents: 0
     }
   },
   created() {
@@ -45,11 +47,18 @@ export default {
       EventService.getEvents(2, this.page)
       .then((response) => {
         this.events = response.data
+        this.totalEvents = response.headers['x-total-count']
       })
       .catch((error) => {
         console.log(error)
       })
     })
+  },
+  computed: {
+    hasNextPage() {
+      let totalPages = Math.ceil(this.totalEvents / 2)
+      return this.page < totalPages
+    }
   }
 }
 </script>
