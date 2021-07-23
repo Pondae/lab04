@@ -42,6 +42,10 @@ export default {
     page: {
       type: Number,
       required: true
+    },
+    addPageLink: {
+      type: Number,
+      required: true
     }
   },
   components: {
@@ -51,7 +55,7 @@ export default {
     return {
       events: null,
       totalEvents: 0,
-      addPage: 2
+      addPage: this.addPageLink
     }
   },
   created() {
